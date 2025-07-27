@@ -2,6 +2,8 @@ package main
 
 import (
 	"html/template"
+	"log"
+	"net/http"
 	"os"
 )
 
@@ -32,6 +34,8 @@ func main() {
 		checkError(err)
 		tpl.Execute(index, nil)
 	}
+
+	log.Fatal(http.ListenAndServe(":8080", http.FileServer(http.Dir(c.buildDir))))
 }
 
 func checkError(e error) {
