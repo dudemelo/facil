@@ -27,8 +27,11 @@ func main() {
 	for _, file := range dir {
 		fname := file.Name()
 		pname := fname[0 : len(fname)-5]
-		tpl := template.Must(template.ParseFiles(c.pagesDir + file.Name()))
-		tpl = template.Must(template.Must(tpl.Clone()).ParseGlob(c.templatesDir + "*.tmpl"))
+		if pname == "index" {
+			pname = ""
+		}
+		tpl := template.Must(template.ParseFiles(c.pagesDir + fname))
+		tpl = template.Must(template.Must(tpl.Clone()).ParseGlob(c.templatesDir + "*.html"))
 		os.Mkdir(c.buildDir+pname, 0775)
 		index, err := os.Create(c.buildDir + pname + "/index.html")
 		checkError(err)
