@@ -13,15 +13,27 @@ type config struct {
 	templatesDir string
 }
 
+var c config
+
 func main() {
-	c := config{
+	c = config{
 		buildDir:     "example/build/",
 		pagesDir:     "example/pages/",
 		templatesDir: "example/templates/",
 	}
+
 	checkError(os.RemoveAll(c.buildDir))
 	checkError(os.Mkdir(c.buildDir, 0755))
 
+	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+		build()
+		http.FileServer(http.Dir(c.buildDir)).ServeHTTP(w, r)
+	})
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func build() {
 	dir, err := os.ReadDir(c.pagesDir)
 	checkError(err)
 	for _, file := range dir {
@@ -37,8 +49,6 @@ func main() {
 		checkError(err)
 		tpl.Execute(index, nil)
 	}
-
-	log.Fatal(http.ListenAndServe(":8080", http.FileServer(http.Dir(c.buildDir))))
 }
 
 func checkError(e error) {

@@ -1,1 +1,31 @@
-something
+{{template "base" .}} {{- define "body" -}}
+<section class="max-w-4xl mx-auto my-18 px-4 space-y-6 text-center">
+  <h2 class="font-bold text-center text-6xl/16 tracking-tighter">
+    Generate Websites That Outrank Competitors
+  </h2>
+  <p class="max-w-2xl mx-auto text-xl">
+    Create lightning-fast, SEO-optimized static sites with zero unnecessary code
+    and automatic search engine perfection.
+  </p>
+  <a
+    class="bg-primary hover:bg-primary/90 inline-block font-semibold px-6 py-4 rounded text-white"
+    href="/docs/"
+    >Get started</a
+  >
+</section>
+
+<section class="grid grid-cols-3 max-w-4xl mx-auto">
+  <article>
+    <h3>Lightning-fast Performance</h3>
+    <p>Static sites load instantly, boosting SEO rankings.</p>
+  </article>
+  <article>
+    <h3>Automatic SEO optimization</h3>
+    <p>Built-in meta tags, sitemaps, and schema markup.</p>
+  </article>
+  <article>
+    <h3>Easy Deployment</h3>
+    <p>Push to GitHub Pages, Netlify, Vercel in seconds.</p>
+  </article>
+</section>
+{{- end -}}
