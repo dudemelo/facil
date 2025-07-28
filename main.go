@@ -17,9 +17,9 @@ var c config
 
 func main() {
 	c = config{
-		buildDir:     "example/build/",
-		pagesDir:     "example/pages/",
-		templatesDir: "example/templates/",
+		buildDir:     "site/build/",
+		pagesDir:     "site/pages/",
+		templatesDir: "site/templates/",
 	}
 
 	checkError(os.RemoveAll(c.buildDir))
