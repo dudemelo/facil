@@ -1,18 +1,27 @@
 package main
 
 import (
+	"bytes"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/adrg/frontmatter"
+	"github.com/yuin/goldmark"
 )
 
 type config struct {
 	buildDir     string
 	pagesDir     string
 	templatesDir string
+}
+
+type meta struct {
+	Template string `yaml:"template"`
 }
 
 var c config
@@ -52,12 +61,27 @@ func build(srcDir string, dstDir string) {
 			continue
 		}
 
-		fname := strings.TrimSuffix(file.Name(), filepath.Ext(file.Name()))
+		fext := filepath.Ext(file.Name())
+		fname := strings.TrimSuffix(file.Name(), fext)
 		if fname != "index" {
 			dstFile = filepath.Join(dstDir, fname)
 		}
 
-		tpl := template.Must(template.ParseFiles(srcFile))
+		var tpl *template.Template
+
+		if fext == ".md" {
+			var buf bytes.Buffer
+			var fm meta
+			md, err := os.ReadFile(srcFile)
+			checkError(err)
+			rest, err := frontmatter.Parse(bytes.NewReader(md), &fm)
+			checkError(goldmark.Convert(rest, &buf))
+			checkError(err)
+			tpl = template.Must(template.New("").Parse(buf.String()))
+		} else {
+			tpl = template.Must(template.ParseFiles(srcFile))
+		}
+
 		tpl = template.Must(template.Must(tpl.Clone()).ParseGlob(filepath.Join(c.templatesDir, "*.html")))
 		checkError(os.MkdirAll(dstFile, 0775))
 		index, err := os.Create(filepath.Join(dstFile, "index.html"))
