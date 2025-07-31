@@ -1,3 +1,3 @@
-module github.com/dudemelo/facil
+module jfmelo.com/pkg/nova
 
 go 1.23.3

@@ -6,7 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
-        --color-primary: var(--color-violet-600);
+        --color-primary: var(--color-pink-600);
+        --color-primary-hover: var(--color-pink-700);
       }
       a {
         @apply cursor-pointer;
@@ -14,45 +15,48 @@
     </style>
   </head>
   <body class="flex flex-col">
-    <header class="flex items-center justify-between p-4 shadow">
-      <h1 class="font-extrabold text-3xl tracking-tighter">
-        <a class="flex items-center" href="/">
+    <header class="mb-6 p-6">
+      <div class="flex items-center justify-between">
+        <a
+          class="flex font-semibold gap-x-1 items-center lowercase text-2xl text-primary tracking-tighter"
+          href="/"
+        >
           <svg
-            class="mb-1 stroke-primary"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-coffee-icon lucide-coffee"
+            class="w-6"
           >
-            <path d="M10 2v2" />
-            <path d="M14 2v2" />
             <path
-              d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
+              d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
             />
-            <path d="M6 2v2" />
+            <path d="M20 2v4" />
+            <path d="M22 4h-4" />
+            <circle cx="4" cy="20" r="2" />
           </svg>
-          Facil
+          Nova
         </a>
-      </h1>
-      <nav>
-        <ul>
-          <li><a href="/docs/">Documentation</a></li>
-        </ul>
-      </nav>
-      <iframe
-        src="https://ghbtns.com/github-btn.html?user=dudemelo&repo=facil&type=star&count=false&size=large"
-        frameborder="0"
-        scrolling="0"
-        width="170"
-        height="30"
-        title="GitHub"
-      ></iframe>
+        <nav>
+          <ul
+            class="flex font-semibold text-slate-600 transition-colors [&_a]:hover:text-slate-800 [&_a]:p-4"
+          >
+            <li><a href="/tutorials/">Tutorials</a></li>
+            <li><a href="/docs/">Documentation</a></li>
+          </ul>
+        </nav>
+        <iframe
+          src="https://ghbtns.com/github-btn.html?user=dudemelo&repo=nova&type=star&count=true&size=large"
+          frameborder="0"
+          scrolling="0"
+          width="112"
+          height="30"
+          title="GitHub"
+        ></iframe>
+      </div>
     </header>
     {{template "body" .}}
   </body>
