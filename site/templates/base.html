@@ -14,7 +14,7 @@
       }
     </style>
   </head>
-  <body class="flex flex-col">
+  <body>
     <header class="mb-6 p-6">
       <div class="flex items-center justify-between">
         <a
@@ -57,7 +57,7 @@
         ></iframe>
       </div>
     </header>
-    {{template "body" .}}
+    <main>{{template "page" .}}</main>
   </body>
 </html>
 {{- end -}}

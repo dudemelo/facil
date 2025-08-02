@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -22,6 +21,10 @@ type config struct {
 
 type meta struct {
 	Template string `yaml:"template"`
+}
+
+type props struct {
+	Meta meta
 }
 
 var c config
@@ -67,26 +70,30 @@ func build(srcDir string, dstDir string) {
 			dstFile = filepath.Join(dstDir, fname)
 		}
 
+		checkError(os.MkdirAll(dstFile, 0775))
+		index, err := os.Create(filepath.Join(dstFile, "index.html"))
+		checkError(err)
+
+		fcontent, err := os.ReadFile(srcFile)
+		checkError(err)
+
+		var fm meta
+		rest, err := frontmatter.Parse(bytes.NewReader(fcontent), &fm)
+
 		var tpl *template.Template
 
 		if fext == ".md" {
 			var buf bytes.Buffer
-			var fm meta
-			md, err := os.ReadFile(srcFile)
-			checkError(err)
-			rest, err := frontmatter.Parse(bytes.NewReader(md), &fm)
 			checkError(goldmark.Convert(rest, &buf))
-			checkError(err)
-			tpl = template.Must(template.New("").Parse(buf.String()))
+			tpl = template.Must(template.New("page").Parse(buf.String()))
 		} else {
-			tpl = template.Must(template.ParseFiles(srcFile))
+
+			tpl = template.Must(template.New("page").Parse(string(rest)))
 		}
 
-		tpl = template.Must(template.Must(tpl.Clone()).ParseGlob(filepath.Join(c.templatesDir, "*.html")))
-		checkError(os.MkdirAll(dstFile, 0775))
-		index, err := os.Create(filepath.Join(dstFile, "index.html"))
-		checkError(err)
-		tpl.Execute(index, nil)
+		tpl = template.Must(tpl.ParseFiles(filepath.Join(c.templatesDir, fm.Template+".html")))
+		checkError(tpl.ExecuteTemplate(index, fm.Template, nil))
+
 	}
 }
 

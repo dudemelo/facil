@@ -1,0 +1,5 @@
+---
+template: "docs"
+---
+
+# Architecture

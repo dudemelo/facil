@@ -1,0 +1,67 @@
+{{- define "docs" -}}
+<html html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-primary: var(--color-pink-600);
+        --color-primary-hover: var(--color-pink-700);
+      }
+      main {
+        @apply flex flex-col gap-6 p-12;
+        h1 {
+          @apply font-extrabold text-5xl tracking-tighter;
+        }
+        a {
+          @apply hover:underline text-primary;
+        }
+      }
+    </style>
+  </head>
+  <body class="flex">
+    <aside class="border-r border-slate-200 flex flex-col gap-4 w-[200px]">
+      <a
+        class="flex font-bold gap-x-1 items-center lowercase text-2xl px-6 py-4 text-primary tracking-tighter"
+        href="/docs"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-6"
+        >
+          <path
+            d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+          />
+          <path d="M20 2v4" />
+          <path d="M22 4h-4" />
+          <circle cx="4" cy="20" r="2" />
+        </svg>
+        Nova
+        <sup
+          class="bg-primary/14 font-normal px-2 rounded-full tracking-normal text-xs"
+          >beta</sup
+        >
+      </a>
+      <nav>
+        <ul
+          class="grid text-slate-600 transition-colors [&_a]:block [&_a]:hover:bg-slate-200 [&_a]:px-6 [&_a]:py-2 [&_a]:rounded [&_hr]:border-slate-200 [&_hr]:my-4 [&_span]:font-semibold [&_span]:block [&_span]:mb-4 [&_span]:px-6"
+        >
+          <li><a href="/">&lsaquo; Website</a></li>
+          <li><hr /></li>
+          <li><span>Documentation</span></li>
+          <li><a href="/docs/">Overview</a></li>
+          <li><a href="/docs/architecture/">Architecture</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main>{{template "page" .}}</main>
+  </body>
+</html>
+{{- end -}}

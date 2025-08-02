@@ -1,7 +1,9 @@
 ---
-template: "base"
+template: "docs"
 ---
 
-# Documentation
+# Overview
 
-This is the official Nova documentation.
+## Install
+
+- [Installing](/docs/installing/)
