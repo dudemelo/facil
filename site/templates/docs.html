@@ -10,7 +10,7 @@
         --color-primary-hover: var(--color-pink-700);
       }
       main {
-        @apply flex flex-col gap-6 p-12;
+        @apply flex flex-col gap-6 max-w-3xl mx-auto p-12;
         h1 {
           @apply font-extrabold text-5xl tracking-tighter;
         }
@@ -56,12 +56,13 @@
           <li><a href="/">&lsaquo; Website</a></li>
           <li><hr /></li>
           <li><span>Documentation</span></li>
-          <li><a href="/docs/">Overview</a></li>
-          <li><a href="/docs/architecture/">Architecture</a></li>
+          <li><a href="/docs/">Getting started</a></li>
         </ul>
       </nav>
     </aside>
-    <main>{{template "page" .}}</main>
+    <div class="flex-1 overflow-y-auto">
+      <main>{{template "page" .}}</main>
+    </div>
   </body>
 </html>
 {{- end -}}

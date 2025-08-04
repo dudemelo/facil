@@ -3,22 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
-        --color-primary: var(--color-pink-600);
-        --color-primary-hover: var(--color-pink-700);
+        --font-sans:
+          "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --color-primary: var(--color-blue-400);
+        --color-primary-hover: var(--color-blue-500);
       }
       a {
         @apply cursor-pointer;
       }
     </style>
   </head>
-  <body>
-    <header class="mb-6 p-6">
+  <body class="text-neutral-900">
+    <header class="p-4">
       <div class="flex items-center justify-between">
         <a
-          class="flex font-semibold gap-x-1 items-center lowercase text-2xl text-primary tracking-tighter"
+          class="flex font-bold gap-x-1 hover:text-primary-hover items-center lowercase text-4xl text-primary tracking-tight transition-colors"
           href="/"
         >
           <svg
@@ -29,7 +38,7 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="w-6"
+            class="w-7"
           >
             <path
               d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
@@ -40,12 +49,10 @@
           </svg>
           Nova
         </a>
-        <nav>
-          <ul
-            class="flex font-semibold text-slate-600 transition-colors [&_a]:hover:text-slate-800 [&_a]:p-4"
-          >
-            <li><a href="/docs/">Documentation</a></li>
-          </ul>
+        <nav
+          class="flex font-medium items-center text-neutral-600 transition-colors [&_a]:hover:text-neutral-800 [&_a]:p-4"
+        >
+          <a href="/docs/">Documentation</a>
         </nav>
         <iframe
           src="https://ghbtns.com/github-btn.html?user=dudemelo&repo=nova&type=star&count=true&size=large"
@@ -58,6 +65,9 @@
       </div>
     </header>
     <main>{{template "page" .}}</main>
+    <footer class="bg-primary/60 py-16 text-center text-white">
+      &copy;2025 Nova
+    </footer>
   </body>
 </html>
 {{- end -}}
